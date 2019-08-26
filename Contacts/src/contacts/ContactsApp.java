@@ -46,10 +46,13 @@ public class ContactsApp extends Application {
         viewContactButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                Contact selectedContact = contacts.get(contactListView.getSelectionModel().getSelectedIndex());
+                Contact selectedContact = contacts.get
+        (contactListView.getSelectionModel().getSelectedIndex());
+                
                 
                 Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle(selectedContact.getFirstName() + "'s Contact Details");
+                alert.setTitle(selectedContact.getFirstName() 
+                        + "'s Contact Details");
                 alert.setHeaderText(null);
                 alert.setContentText(selectedContact.toString());
                 
@@ -83,7 +86,7 @@ public class ContactsApp extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        loadContacts(args[1]);
+        loadContacts("contacts.csv");
         launch(args);
     }
     
@@ -96,13 +99,16 @@ public class ContactsApp extends Application {
             
             while(contactReader.hasNext()) {
                 String[] contactString = contactReader.nextLine().split(",");
-                Contact newContact = new Contact(contactString[0], contactString[1], contactString[2], contactString[3]);
+                Contact newContact = new Contact(contactString[0], 
+                        contactString[1], contactString[2], contactString[3]);
                 contacts.add(newContact);
-                names.add(newContact.getFirstName() + " " + newContact.getLastName());
+                names.add(newContact.getFirstName() + " " 
+                        + newContact.getLastName());
             }
         } catch (FileNotFoundException ex) {
             System.err.print("Contact list csv not found");
-            Logger.getLogger(ContactsApp.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger
+        (ContactsApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         contactNames = FXCollections.observableArrayList(names);
